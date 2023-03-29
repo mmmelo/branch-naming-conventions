@@ -1,102 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Git branch name normalizer/sanitizer</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  
-  <body>
-    <script>
-      function sanitize(name) {
-        // this is an improved logic based on the same one used by VSCode here https://github.com/microsoft/vscode/blob/master/extensions/git/src/commands.ts#L1718
-        const branchWhitespaceChar = '-';
-        const output = name ?
-          (shouldTrimEmptySpaces() ? name.replace(/\s+/g, " ") : name).trim().replace(/^-+/, '').replace(/^\.|\/\.|\.\.|~|\^|:|\/$|\.lock$|\.lock\/|\\|\*|\s|^\s*$|\.$|\[|\]$/g, branchWhitespaceChar)
-          : name;
-        
-        return shouldLowerCase() ? output.toLowerCase() : output;
-      }
-           
-      function shouldTrimEmptySpaces() {
-        return true;
-      }
-      
-      function shouldLowerCase() {
-        return true;
-      }
-      
-      function getInputText() {
-        return document.getElementById("git-input").value;
-      }
-      
-      function getResultText() {
-        return document.getElementById("git-result").value;
-      }
-      
-      function setResultText(text) {
-        document.getElementById("git-result").value = text;
-      }
-      
-      function onClickNormalize() {
-        const inputValue = getInputText();
-        const sanitizedValue = sanitize(inputValue);
-        setResultText(sanitizedValue);
-      }
-      
-      function onClickCopyToClipboard() {
-        const result = getResultText();
-        navigator.clipboard.writeText(result);
-      }
-    </script>
-    
-    <style>
-      body {
-        max-width: 900px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      
-      .container {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-      }
-      
-      .container, .container .label-and-input {
-        display: flex;
-        flex: 1;
-      }
-      
-      .container .label-and-input label {
-        font-weight: bold;
-      }
-      
-      .container .label-and-input input {
-        margin-left: 1rem;
-        margin-right: 1rem;
-        flex: 1;
-      }
-    </style>
-    
-    <h1>Git branch name normalizer/sanitizer</h1>
-    <p>Paste any text in the input below and sanitize it into a git-compatible branch name.</p>
-    
-    <div class="container">
-      <div class="label-and-input">
-        <label for="git-input">Branch name:</label>
-        <input id="git-input" type="text">
-      </div>
-      <button onClick="onClickNormalize()">Normalize!</button>
-    </div>
-    
-    <div class="container">
-      <div class="label-and-input">
-        <label for="git-result">Result:</label>
-        <input id="git-result" type="text" disabled>
-      </div>
-      <button onClick="onClickCopyToClipboard()">Copy to clipboard</button>
-    </div>
-    
-    <p>View source code on <a href="https://github.com/Protolane/git-branch-name-normalizer" target="_blank">GitHub</a></p>
-  </body>
+<head>
+  <title>Git branch</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<h1>Git branch naming conventions</h1>
+
+<div class="container">
+  <div class="label-and-input">
+    <label for="git-input">Branch name:</label>
+    <input id="git-input" type="text">
+  </div>
+  <button onClick="onClickNormalize()">Normalize!</button>
+</div>
+
+<div class="container">
+  <div class="label-and-input">
+    <label for="git-result">Result:</label>
+    <input id="git-result" type="text" disabled>
+  </div>
+  <button onClick="onClickCopyToClipboard()">Copy to clipboard</button>
+</div>
+
+<p>View source code on <a href="https://github.com/mmmelo/branch-naming-conventions" target="_blank">GitHub</a></p>
+
+<script src="script.js"></script>
+</body>
 </html>

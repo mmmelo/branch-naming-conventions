@@ -1,0 +1,25 @@
+body {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.container, .container .label-and-input {
+    display: flex;
+    flex: 1;
+}
+
+.container .label-and-input label {
+    font-weight: bold;
+}
+
+.container .label-and-input input {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    flex: 1;
+}
